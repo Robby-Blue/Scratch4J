@@ -1,0 +1,6 @@
+# workspace stuff
+
+.settings
+bin
+.classpath
+.project
