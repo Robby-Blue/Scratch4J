@@ -1,5 +1,7 @@
 package me.robbyblue.scratch4j;
 
+import me.robbyblue.scratch4j.cloud.ScratchCloudSession;
+
 public class ScratchSession {
 
 	private String username;
@@ -34,6 +36,10 @@ public class ScratchSession {
 
 	public void setCsrftoken(String csrftoken) {
 		this.csrftoken = csrftoken;
+	}
+
+	public ScratchCloudSession startCloudSession(int projectID) {
+		return new ScratchCloudSession(this, projectID);
 	}
 
 }

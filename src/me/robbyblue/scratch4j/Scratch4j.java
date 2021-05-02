@@ -46,7 +46,6 @@ public class Scratch4j {
 				while ((responseLine = br.readLine()) != null) {
 					response.append(responseLine.trim());
 				}
-				System.out.println(response.toString());
 				List<String> cookies = con.getHeaderFields().get("Set-Cookie");
 				if (cookies != null) {
 					for (String s : cookies) {
