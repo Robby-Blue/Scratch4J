@@ -75,6 +75,9 @@ public class ScratchCloudSession {
 	}
 
 	public void setVariable(String variable, String value) {
+		if (!variable.startsWith("☁")) {
+			variable = "☁ " + variable;
+		}
 		sendPacket(new PacketSetVariable(variable, value));
 	}
 
