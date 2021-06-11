@@ -38,6 +38,7 @@ import me.robbyblue.scratch4j.cloud.packet.packets.PacketSetVariable;
 
 public class ScratchCloudSession {
 
+	public char cloudChar = '\u2601';
 	private ScratchSession session;
 	private int projectID;
 	private ScratchCloudSocket socket;
@@ -95,8 +96,8 @@ public class ScratchCloudSession {
 	}
 
 	public void setVariable(String variable, String value) {
-		if (!variable.startsWith("☁")) {
-			variable = "☁ " + variable;
+		if (!variable.startsWith(Character.toString(this.cloudChar))) {
+			variable = this.cloudChar + " " + variable;
 		}
 		sendPacket(new PacketSetVariable(variable, value));
 	}
