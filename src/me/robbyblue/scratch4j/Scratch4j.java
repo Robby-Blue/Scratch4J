@@ -48,6 +48,8 @@ public class Scratch4j {
 			HttpURLConnection con = (HttpURLConnection) url.openConnection();
 			con.setRequestMethod("PUT");
 
+			con.addRequestProperty("user-agent",
+					"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.128 Safari/537.36 OPR/75.0.3969.285");
 			con.addRequestProperty("referer", "https://scratch.mit.edu");
 			con.addRequestProperty("x-requested-with", "XMLHttpRequest");
 			con.addRequestProperty("x-csrftoken", "abc");
