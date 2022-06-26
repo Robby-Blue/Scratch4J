@@ -16,7 +16,7 @@ cloudSession.setVariable("variable", "123");
 ```
 Listening for cloud variable changes
 ```java
-cloudsession.addListener(event -> {
+cloudSession.addListener(event -> {
 	System.out.println(event.getVariable() + " was changed to " + event.getValue());
 });
 ```
