@@ -29,6 +29,7 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import org.java_websocket.drafts.Draft_6455;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import me.robbyblue.scratch4j.ScratchSession;
@@ -44,13 +45,13 @@ public class ScratchCloudSession {
 	private ScratchCloudSocket socket;
 	private ArrayList<ScratchCloudListener> listeners = new ArrayList<ScratchCloudListener>();
 
-	public ScratchCloudSession(ScratchSession session, int projectID) {
+	public ScratchCloudSession(ScratchSession session, int projectID) throws JSONException {
 		this.session = session;
 		this.projectID = projectID;
 		connect();
 	}
 
-	private void connect() {
+	private void connect() throws JSONException {
 		try {
 			Map<String, String> header = new HashMap<String, String>();
 			header.put("cookie", "scratchsessionsid=" + this.session.getSessionid() + ";");
@@ -72,7 +73,11 @@ public class ScratchCloudSession {
 		executor.schedule(() -> {
 			if (!this.socket.isOpen()) {
 				this.socket = null;
-				connect();
+				try {
+					connect();
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
 			}
 		}, 1, TimeUnit.SECONDS);
 	}
@@ -81,7 +86,7 @@ public class ScratchCloudSession {
 		this.socket.close();
 	}
 
-	private void sendPacket(Packet packet) {
+	private void sendPacket(Packet packet) throws JSONException {
 		JSONObject packetJson = new JSONObject();
 		packetJson.put("user", this.session.getUsername());
 		packetJson.put("project_id", this.projectID);
@@ -95,7 +100,7 @@ public class ScratchCloudSession {
 		this.socket.send(jsonString);
 	}
 
-	public void setVariable(String variable, String value) {
+	public void setVariable(String variable, String value) throws JSONException {
 		if (!variable.startsWith(Character.toString(this.cloudChar))) {
 			variable = this.cloudChar + " " + variable;
 		}

@@ -27,6 +27,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Scratch4j {
@@ -34,7 +35,7 @@ public class Scratch4j {
 	public static void main(String[] args) {
 	}
 
-	public ScratchSession login(String username, String password) {
+	public ScratchSession login(String username, String password) throws JSONException {
 		JSONObject loginJson = new JSONObject();
 		loginJson.put("username", username);
 		loginJson.put("password", password);

@@ -1,5 +1,7 @@
 package me.robbyblue.scratch4j;
 
+import org.json.JSONException;
+
 /*
 Copyright (c)
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -58,7 +60,7 @@ public class ScratchSession {
 		this.csrftoken = csrftoken;
 	}
 
-	public ScratchCloudSession startCloudSession(int projectID) {
+	public ScratchCloudSession startCloudSession(int projectID) throws JSONException {
 		return new ScratchCloudSession(this, projectID);
 	}
 

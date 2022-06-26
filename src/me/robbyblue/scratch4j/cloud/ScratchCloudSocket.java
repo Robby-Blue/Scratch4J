@@ -27,6 +27,7 @@ import java.util.Map;
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.drafts.Draft;
 import org.java_websocket.handshake.ServerHandshake;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class ScratchCloudSocket extends WebSocketClient {
@@ -50,11 +51,15 @@ public class ScratchCloudSocket extends WebSocketClient {
 
 	@Override
 	public void onMessage(String message) {
-		JSONObject messageJson = new JSONObject(message);
-
-		ScratchCloudEvent event = new ScratchCloudEvent(messageJson.getString("name"), messageJson.getString("value"));
-		for (ScratchCloudListener listener : scratchCloudSession.getListeners()) {
-			listener.onScratchCloudEvent(event);
+		try {
+			JSONObject messageJson = new JSONObject(message);
+			
+			ScratchCloudEvent event = new ScratchCloudEvent(messageJson.getString("name"), messageJson.getString("value"));
+			for (ScratchCloudListener listener : scratchCloudSession.getListeners()) {
+				listener.onScratchCloudEvent(event);
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
 		}
 	}
 
