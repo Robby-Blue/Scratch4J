@@ -1,5 +1,5 @@
 # Scratch4J
-Scratch4J is a Java library for interacting with the [scratch.mit.edu](htpps://scratch.mit.edu) website. 
+Scratch4J is a Java library for interacting with the [scratch.mit.edu](https://scratch.mit.edu) website. 
 
 ## Getting started
 Logging into an account
@@ -16,7 +16,7 @@ cloudSession.setVariable("variable", "123");
 ```
 Listening for cloud variable changes
 ```java
-cloudsession.addListener(event -> {
+cloudSession.addListener(event -> {
 	System.out.println(event.getVariable() + " was changed to " + event.getValue());
 });
 ```
