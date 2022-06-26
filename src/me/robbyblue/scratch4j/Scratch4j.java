@@ -29,6 +29,8 @@ import java.util.List;
 
 import org.json.JSONObject;
 
+import me.robbyblue.scratch4j.exceptions.ScratchLoginException;
+
 public class Scratch4j {
 
 	public static void main(String[] args) {
@@ -43,7 +45,7 @@ public class Scratch4j {
 		try {
 			String sessionid = null;
 			String csrftoken = null;
-			
+
 			URL url = new URL("https://scratch.mit.edu/accounts/login");
 			HttpURLConnection con = (HttpURLConnection) url.openConnection();
 			con.setRequestMethod("PUT");
@@ -82,13 +84,11 @@ public class Scratch4j {
 					}
 				}
 			}
-			
+
 			return new ScratchSession(username, sessionid, csrftoken);
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new ScratchLoginException();
 		}
-
-		return null;
 	}
 
 }
